@@ -4,8 +4,12 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import CharacterTextSplitter
 
-DB_PATH = "vectorstore"
-PDF_PATH = "data/pritish_cv.pdf"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+PDF_PATH = os.path.join(BASE_DIR, "../data/pritish_cv.pdf")
+DB_PATH = os.path.join(BASE_DIR, "../vectorstore")
+#DB_PATH = "vectorstore"
+#PDF_PATH = "data/pritish_cv.pdf"
 
 def create_vectorstore():
     loader = PyPDFLoader(PDF_PATH)
