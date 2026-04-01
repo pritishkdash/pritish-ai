@@ -1,3 +1,5 @@
+import os
+print("PORT:", os.getenv("PORT"))
 from fastapi import FastAPI
 from pydantic import BaseModel
 from app.rag import retrieve, create_vectorstore
