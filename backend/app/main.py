@@ -2,7 +2,7 @@ import os
 print("PORT:", os.getenv("PORT"))
 from fastapi import FastAPI
 from pydantic import BaseModel
-from .rag import retrieve, create_vectorstore
+from .rag import retrieve#, create_vectorstore
 from .llm import generate_answer
 from fastapi.middleware.cors import CORSMiddleware
 
