@@ -1,4 +1,4 @@
-import os
+'''import os
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
@@ -32,6 +32,36 @@ if not os.path.exists(f"{DB_PATH}/index.faiss"):
     print("⚡ Creating vector database...")
     create_vectorstore()
 
+db = load_vectorstore()
+
+def retrieve(query):
+    docs = db.similarity_search(query, k=3)
+    return " ".join([d.page_content for d in docs])'''
+
+
+
+import os
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import HuggingFaceEmbeddings
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+DB_PATH = os.path.join(BASE_DIR, "../vectorstore")
+
+def load_vectorstore():
+    print("✅ Loading existing vector database...")
+
+    embeddings = HuggingFaceEmbeddings(
+        model_name="all-MiniLM-L6-v2"
+    )
+
+    return FAISS.load_local(
+        DB_PATH,
+        embeddings,
+        allow_dangerous_deserialization=True
+    )
+
+# ✅ ONLY LOAD (NO CREATION)
 db = load_vectorstore()
 
 def retrieve(query):
