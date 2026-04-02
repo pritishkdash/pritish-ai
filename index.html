@@ -179,7 +179,7 @@ async function sendMessage() {
     messagesDiv.appendChild(typing);
 
     try {
-        const res = await fetch("https://pritish-ai.onrender.com", {
+        const res = await fetch("https://pritish-ai.onrender.com/chat", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({question: text})
