@@ -42,18 +42,16 @@ def retrieve(query):
 
 import os
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import FakeEmbeddings
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 DB_PATH = os.path.join(BASE_DIR, "../vectorstore")
 
 def load_vectorstore():
-    print("✅ Loading existing vector database...")
+    print("✅ Loading vectorstore (light mode)...")
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name="all-MiniLM-L6-v2"
-    )
+    # 🔥 NO HEAVY MODEL
+    embeddings = FakeEmbeddings(size=384)
 
     return FAISS.load_local(
         DB_PATH,
@@ -61,7 +59,6 @@ def load_vectorstore():
         allow_dangerous_deserialization=True
     )
 
-# ✅ ONLY LOAD (NO CREATION)
 db = load_vectorstore()
 
 def retrieve(query):
